@@ -1,18 +1,27 @@
 <template>
-    <header><h1> {{ text }} </h1></header>
+    <nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">VueJS</a>
+        <button class="navbar-toggler" type="button">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    <div class="collapse navbar-collapse" >
+        <div class="navbar-nav">
+            <a class="nav-item nav-link active" href="#"><i class="fa-solid fa-house"></i>Home</a>
+            <a class="nav-item nav-link" href="#">Contact</a>
+            <a class="nav-item nav-link" href="#">About</a>
+        </div>
+    </div>
+    </nav>
 </template>
 
 <script>
 export default {
-    name: 'com-header',
-    data() {
-        return {
-            text: 'Hello World'
-        }
-    }
+    name: 'com-header'
 }
 </script>
 
 <style>
-
+.navbar-dark {
+    padding-left: 20px;
+}
 </style>

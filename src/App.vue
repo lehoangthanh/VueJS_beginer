@@ -1,9 +1,12 @@
 <template>
   <div id="app">
     <ComHeader />
-    <ComBody />
+    <ComBody 
+      v-bind:labelEmail="labelEmail"
+      v-bind:labelPassword="labelPassword"
+      v-bind:buttonPassword="buttonPassword"
+    />
     <ComFooter /> 
-
   </div>
 </template>
 
@@ -13,6 +16,13 @@ import ComBody from './components/ComBody.vue';
 import ComFooter from './components/ComFooter.vue';
 export default {
   name: 'app',
+  data () {
+    return {
+      labelEmail: 'Email Address',
+      labelPassword: 'Password',
+      buttonPassword: 'Submit'
+    }
+  },
   components: {
     ComHeader,
     ComFooter,
@@ -22,29 +32,5 @@ export default {
 </script>
 
 <style lang="scss">
-// #app {
-//   font-family: 'Avenir', Helvetica, Arial, sans-serif;
-//   -webkit-font-smoothing: antialiased;
-//   -moz-osx-font-smoothing: grayscale;
-//   text-align: center;
-//   color: #2c3e50;
-// }
 
-// h1, h2 {
-//   font-weight: normal;
-// }
-
-// ul {
-//   list-style-type: none;
-//   padding: 0;
-// }
-
-// li {
-//   display: inline-block;
-//   margin: 0 10px;
-// }
-
-// a {
-//   color: #42b983;
-// }
 </style>

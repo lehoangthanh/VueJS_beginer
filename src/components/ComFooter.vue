@@ -1,5 +1,5 @@
 <template>
-    <footer class="footer">Copyright © Your Website 2021</footer>
+    <footer class="footer">Copyright © Your Website 2022</footer>
 </template>
 <script>
 export default {

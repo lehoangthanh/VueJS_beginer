@@ -20,15 +20,12 @@
 </template>
 <script>
 export default {
-    name: 'com-body',
+    name: 'com-login',
 		props: {
 			labelEmail: String,
 			labelPassword: String,
 			buttonPassword: String
 		},
-		methods: {
-			
-		}
 }
 </script>
 <style>

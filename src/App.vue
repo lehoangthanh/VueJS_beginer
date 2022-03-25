@@ -1,18 +1,13 @@
 <template>
   <div id="app">
     <ComHeader />
-    <ComBody 
-      v-bind:labelEmail="labelEmail"
-      v-bind:labelPassword="labelPassword"
-      v-bind:buttonPassword="buttonPassword"
-    />
-    <ComFooter /> 
+    <router-view />
+    <ComFooter />
   </div>
 </template>
 
 <script>
 import ComHeader from './components/ComHeader.vue';
-import ComBody from './components/ComBody.vue';
 import ComFooter from './components/ComFooter.vue';
 export default {
   name: 'app',
@@ -20,14 +15,13 @@ export default {
     return {
       labelEmail: 'Email Address',
       labelPassword: 'Password',
-      buttonPassword: 'Submit'
+      buttonPassword: 'Submit',
     }
   },
   components: {
     ComHeader,
     ComFooter,
-    ComBody
-  }
+  },
 }
 </script>
 

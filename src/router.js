@@ -6,7 +6,6 @@ import ComListUser from './components/users/ComListUser.vue'
 import ComUserDetail from './components/users/ComUserDetail.vue'
 import ComUserAdd from './components/users/ComUserAdd.vue'
 
-
 Vue.use(VueRouter)
 
 export default new VueRouter ({
@@ -47,4 +46,3 @@ export default new VueRouter ({
 	},
 ]
 });
-

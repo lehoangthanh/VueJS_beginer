@@ -14,21 +14,23 @@
     	<label class="form-password">{{ labelPassword }}</label>
    	 <input type="text" class="form-control">
  		</div>
-  	<button type="submit" class="btn btn-primary" >{{ buttonPassword }}</button>
+  	<button type="submit" class="btn btn-primary" v-on:click="message">{{ buttonPassword }}</button>
 		</form>
     </div>
 </template>
 <script>
 export default {
     name: 'com-body',
-		props: {
-			labelEmail: String,
-			labelPassword: String,
-			buttonPassword: String
-		},
-		methods: {
-			
-		}
+	props: {
+		labelEmail: String,
+		labelPassword: String,
+		buttonPassword: String
+	},
+	methods: {
+		message: function() {
+			alert('OK')
+		}		
+	}
 }
 </script>
 <style>

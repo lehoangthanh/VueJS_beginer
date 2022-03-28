@@ -2,7 +2,7 @@
   <div id="app">
     <ComHeader />
     <router-view />
-    <ComFooter />
+    <ComFooter /> 
   </div>
 </template>
 
@@ -13,9 +13,6 @@ export default {
   name: 'app',
   data () {
     return {
-      labelEmail: 'Email Address',
-      labelPassword: 'Password',
-      buttonPassword: 'Submit',
     }
   },
   components: {

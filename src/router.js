@@ -9,40 +9,40 @@ import ComUserAdd from './components/users/ComUserAdd.vue'
 Vue.use(VueRouter)
 
 export default new VueRouter ({
-  mode: 'history',
-  routes: [
-    //login
-    { path: '/', name: 'loginpage', component: ComLogin },
-    {
-      path: '/users',
-       name: 'users',
-       component: { render: h => h('router-view') },
-       children: [
-        {
-          path: 'list',
-          name: 'users.list',
-          component: ComListUser,
-        },
-        {
-          path: 'add',
-          name: 'users.add',
-          component: ComUserAdd,
-        }
-       ],
-    },
-    {
-      // router Group
-      path: '/users/:id',
-      name: 'users',
-      component: { render: h => h('router-view') },
-      children: [
-        {
-          // user profile
-          path: 'profile',
-          name: 'users.profile',
-          component: ComUserDetail
-        }
-      ]
-    },
-  ]
+	mode: 'history',
+	routes: [
+	//login
+	{ path: '/', name: 'loginpage', component: ComLogin },
+	{
+	path: '/users',
+	name: 'users',
+	component: { render: h => h('router-view') },
+	children: [
+		{
+		path: 'list',
+		name: 'users.list',
+		component: ComListUser,
+		},
+		{
+		path: 'add',
+		name: 'users.add',
+		component: ComUserAdd,
+		}
+		],
+	},
+	{
+	// router Group
+	path: '/users/:id',
+	name: 'users',
+	component: { render: h => h('router-view') },
+	children: [
+		{
+		// user profile
+		path: 'profile',
+		name: 'users.profile',
+		component: ComUserDetail
+		}
+	]
+	},
+]
 });

@@ -6,9 +6,9 @@
         </button>
     <div class="collapse navbar-collapse" >
         <div class="navbar-nav">
-            <a class="nav-item nav-link active" href="#"><i class="fa-solid fa-house"></i>Home</a>
-            <a class="nav-item nav-link" href="#">Contact</a>
-            <a class="nav-item nav-link" href="#">About</a>
+            <a class="nav-item nav-link active" href="./">Home</a>
+            <a class="nav-item nav-link" href="./Contact">Contact</a>
+            <a class="nav-item nav-link" href="./About">About</a>
         </div>
     </div>
     </nav>

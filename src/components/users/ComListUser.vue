@@ -1,4 +1,5 @@
 <template>
+  <div>
 		<div class="row">
       <div class="col-md-9">
         <table class="table table-striped table-hover">
@@ -33,6 +34,8 @@
         </table>
       </div>
 		</div>
+    <router-link to="/" class="btn btn-primary">Back</router-link>
+  </div>
 </template>
 <script>
 export default {

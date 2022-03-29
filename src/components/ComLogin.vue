@@ -7,28 +7,38 @@
     </body>
 		<form class="form-login">
   	<div class="mb-3">
-    	<label class="form-email">{{ labelEmail }}</label>
-    	<input type="text" class="form-control">
+    	<label class="form-email">{{ labelUsername }}</label>
+    	<input type="text" class="form-control" v-model="userName">
   	</div>
   	<div class="mb-3">
     	<label class="form-password">{{ labelPassword }}</label>
-   	 <input type="text" class="form-control">
+   	 <input type="text" class="form-control" v-model="passWord">
  		</div>
-  	<button type="submit" class="btn btn-primary" v-on:click="message">{{ buttonPassword }}</button>
+  	<button type="submit" class="btn btn-primary" @click.prevent="login">{{ buttonPassword }}</button>
 		</form>
     </div>
 </template>
 <script>
 export default {
     name: 'com-body',
+	data() {
+		return {
+			userName: '',
+			passWord: ''
+		}
+	},
 	props: {
-		labelEmail: String,
+		labelUsername: String,
 		labelPassword: String,
 		buttonPassword: String
 	},
 	methods: {
-		message: function() {
-			alert('OK')
+		login() {
+			if(this.userName === 'admin' && this.passWord === '123') {
+				this.$router.push('/users/list');
+			} else {
+				alert('Đăng nhập thất bại!!!');
+			}
 		}		
 	}
 }
@@ -61,5 +71,8 @@ export default {
 	margin: auto;
 	margin-top: 30px;
 	border: 1px solid #0000;
+}
+.btn-primary {
+	width: 20%;
 }
 </style>

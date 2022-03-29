@@ -1,7 +1,11 @@
 <template>
   <div id="app">
     <ComHeader />
-    <router-view />
+    <router-view 
+      labelUsername = 'Username'
+      labelPassword = 'Password'
+      buttonPassword = 'Submit'
+    />
     <ComFooter /> 
   </div>
 </template>
@@ -17,8 +21,8 @@ export default {
   },
   components: {
     ComHeader,
-    ComFooter,
-  },
+    ComFooter
+  }
 }
 </script>
 

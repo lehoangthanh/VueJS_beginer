@@ -60,7 +60,6 @@ const mutations = {
     },
 
     [MUTATION_TYPES.GET_USER_LIST] (state) {
-      console.log('==userListTmp===')
       state.userList = userListTmp
     },
 }
@@ -76,7 +75,6 @@ const actions = {
   },
 
   [ACTION_TYPES.GET_USER_LIST] ({ commit }) {
-    console.log('=ACTION_TYPES=userListTmp===')
     commit(MUTATION_TYPES.GET_USER_LIST)
   },
 }

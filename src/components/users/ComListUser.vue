@@ -46,8 +46,8 @@ export default {
 		},
 		methods: {
       getUserList() {
-        //let userList = this.$store.getters['user/userList'];
-        const userList = this.$store.dispatch(`${ACTION_TYPES.GET_USER_LIST}`);
+        // this.$store.dispatch(`user/${ACTION_TYPES.GET_USER_LIST}`);
+        const userList = this.$store.getters['user/userList'];
         // if (userList.length === 0) {
         //   this.$store.dispatch(`user/${ACTION_TYPES.getUserList}`)
         // }

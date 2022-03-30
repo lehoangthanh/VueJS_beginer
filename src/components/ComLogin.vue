@@ -19,6 +19,7 @@
     </div>
 </template>
 <script>
+
 export default {
     name: 'com-body',
 	data() {

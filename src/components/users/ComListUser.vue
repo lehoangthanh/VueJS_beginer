@@ -38,14 +38,26 @@
   </div>
 </template>
 <script>
+import { ACTION_TYPES } from '../../store/modules/user'
 export default {
     name: 'com-list-user',
 		props: {
 
 		},
 		methods: {
-
-		}
+      getUserList() {
+        //let userList = this.$store.getters['user/userList'];
+        const userList = this.$store.dispatch(`${ACTION_TYPES.GET_USER_LIST}`);
+        // if (userList.length === 0) {
+        //   this.$store.dispatch(`user/${ACTION_TYPES.getUserList}`)
+        // }
+        console.log('===', this.$store);
+        console.log('=userList==', userList);
+      }
+		},
+    mounted() {
+      this.getUserList()
+    }
 }
 </script>
 <style>

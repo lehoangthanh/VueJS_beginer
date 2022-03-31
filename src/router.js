@@ -12,7 +12,7 @@ export default new VueRouter ({
 	mode: 'history',
 	routes: [
 	//login
-	{ path: '/', name: 'loginpage', component: ComLogin },
+	{ path: '/', name: 'loginpage', component: ComListUser },
 	{
 	path: '/users',
 	name: 'users',

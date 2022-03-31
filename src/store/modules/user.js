@@ -2,7 +2,7 @@ const state = {
   user: {
     id: 0,
     username: '',
-    fullname: '',
+    name: '',
     age: 0,
     address: '',
   },
@@ -12,8 +12,8 @@ const state = {
 const userListTmp = [
   {
 		id: 1,
-		name: 'Quý',
-    username: 'quy',
+		name: 'ABc',
+    username: 'abc',
 		age: 22,
 		address: 'Bạc liêu'
 	},

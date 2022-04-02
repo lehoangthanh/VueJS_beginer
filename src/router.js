@@ -16,7 +16,7 @@ export default new VueRouter ({
 	{
 	path: '/users',
 	name: 'users',
-	component: { render: h => h('router-view') },
+	component: ComListUser,
 	children: [
 		{
 		path: 'list',
@@ -34,7 +34,7 @@ export default new VueRouter ({
 	// router Group
 	path: '/users/:id',
 	name: 'users',
-	component: { render: h => h('router-view') },
+	component: ComUserDetail,
 	children: [
 		{
 		// user profile

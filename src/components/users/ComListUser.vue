@@ -38,9 +38,9 @@ import VueTypes from 'vue-types'
 import { ACTION_TYPES } from '../../store/modules/user'
 export default {
     name: 'com-list-user',
-		props: {
-        userList: VueTypes.array.def([])
-		},
+		// props: {
+    //     userList: VueTypes.array.def([])
+		// },
     data() {
       return {
         userList: [],

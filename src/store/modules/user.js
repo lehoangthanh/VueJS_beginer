@@ -41,7 +41,7 @@ const userListTmp = [
 ]
 
 const getters = {
-  user(state) {
+  getUserByID(state) {
     return state.user
   },
   userList(state) {
@@ -50,13 +50,13 @@ const getters = {
 }
 
 export const MUTATION_TYPES = {
-    SET_USER: 'SET/USER',
+    GET_USER_BY_ID: 'GET/USER_BY_ID',
     GET_USER_LIST: 'GET/USER_LIST',
 }
 
 const mutations = {
-    [MUTATION_TYPES.SET_USER] (state, { user }) {
-        state.user = user
+    [MUTATION_TYPES.GET_USER_BY_ID] (state, { uID }) {
+        state.user = state.userList.find(u => Number(u.id) === Number(uID))
     },
 
     [MUTATION_TYPES.GET_USER_LIST] (state) {
@@ -65,13 +65,13 @@ const mutations = {
 }
 
 export const ACTION_TYPES = {
-  SET_USER: '@SET/USER',
+  GET_USER_BY_ID: '@GET/USER_BY_ID',
   GET_USER_LIST: '@GET/USER_LIST'
 }
 
 const actions = {
-  [ACTION_TYPES.SET_USER] ({ commit }, user) {
-    commit(MUTATION_TYPES.SET_USER, { user })
+  [ACTION_TYPES.GET_USER_BY_ID] ({ commit }, uID) {
+    commit(MUTATION_TYPES.GET_USER_BY_ID, { uID })
   },
 
   [ACTION_TYPES.GET_USER_LIST] ({ commit }) {

@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
-import ComLogin from './components/ComLogin.vue'
+import ComDashBoard from './components/ComDashBoard.vue'
 import ComListUser from './components/users/ComListUser.vue'
 import ComUserDetail from './components/users/ComUserDetail.vue'
 import ComUserAdd from './components/users/ComUserAdd.vue'
@@ -12,7 +12,7 @@ export default new VueRouter ({
 	mode: 'history',
 	routes: [
 	//login
-	{ path: '/', name: 'loginpage', component: ComListUser },
+	{ path: '/', name: 'dashboard', component: ComDashBoard },
 	{
 	path: '/users',
 	name: 'users',
@@ -33,7 +33,7 @@ export default new VueRouter ({
 	{
 	// router Group
 	path: '/users/:id',
-	name: 'users',
+	name: 'user_ac',
 	component: ComUserDetail,
 	children: [
 		{

@@ -69,7 +69,15 @@ module.exports = {
             return 'images/[name].[ext]?[hash]'
           }
         }
-      }
+      },
+      {
+        test: /\.(woff2?|eot|ttf|otf)$/,
+        loader: 'file-loader',
+        options: {
+            limit: 10000,
+            name: 'fonts/[name].[hash:7].[ext]'
+        }
+     }
     ]
   },
   resolve: {

@@ -1,6 +1,17 @@
 <template>
-  <div id="app">
-    <div class="d-flex flex-column flex-lg-row h-lg-full bg-surface-secondary">
+  <div id="app" class="g-sidenav-show bg-gray-100">
+    <div class="min-height-300 bg-primary position-absolute w-100"></div>
+    <ComSideNav />
+    <main class="main-content position-relative border-radius-lg">
+      <!-- Navbar -->
+      <ComNav />
+      <!-- End Navbar -->
+      <div class="container-fluid py-4">
+        <router-view />
+        <ComFooter />
+      </div>
+    </main>
+    <!-- <div class="d-flex flex-column flex-lg-row h-lg-full bg-surface-secondary">
       <ComNav />
       <div class="flex-lg-1 h-screen overflow-y-lg-auto">
         <ComHeader />
@@ -10,25 +21,31 @@
           </div>
         </main>
       </div>
-      <!-- <router-view 
+      <router-view
         labelUsername = 'Username'
         labelPassword = 'Password'
         buttonPassword = 'Submit'
-      /> -->
-      <!-- <ComFooter />  -->
-    </div>
+      />
+    </div> -->
   </div>
 </template>
 <script>
+import "./assets/js/plugins/perfect-scrollbar.min";
+import "./assets/js/plugins/smooth-scrollbar.min";
+import "./assets/js/fontawesome_42d5adcbca";
+
+import ComSideNav from "./components/ComSideNav.vue";
 import ComNav from "./components/ComNav.vue";
 import ComHeader from "./components/ComHeader.vue";
 import ComFooter from "./components/ComFooter.vue";
 export default {
   name: "app",
   data() {
-    return {};
+    return {
+    };
   },
   components: {
+    ComSideNav,
     ComNav,
     ComHeader,
     ComFooter,
@@ -37,6 +54,7 @@ export default {
 </script>
 
 <style lang="scss">
-  @import './assets/css/main.css';
-  @import './assets/css/utilities.css';
+@import './assets/css/nucleo-icons.css';
+@import './assets/css/nucleo-svg.css';
+@import './assets/css/argon-dashboard.css';
 </style>

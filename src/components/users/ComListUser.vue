@@ -129,11 +129,6 @@ export default {
 };
 </script>
 <style>
-
-</style>
-
-
-
     <!-- <div class="col-md-9">
       <div class="form-group">
         <input

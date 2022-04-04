@@ -185,7 +185,7 @@
             <div class="carousel-inner border-radius-lg h-100">
               <div
                 class="carousel-item h-100 active"
-                :style="`background-image: url(${require('../assets/img/carousel-1.jpg')});
+                :style="`background-image: url(${require('@/assets/img/carousel-1.jpg')});
         background-size: cover;`"
               >
                 <div
@@ -218,7 +218,7 @@
               </div>
               <div
                 class="carousel-item h-100"
-                :style="`background-image: url(${require('../assets/img/carousel-2.jpg')});
+                :style="`background-image: url(${require('@/assets/img/carousel-2.jpg')});
         background-size: cover;`"
               >
                 <div
@@ -253,7 +253,7 @@
               </div>
               <div
                 class="carousel-item h-100"
-                :style="`background-image: url(${require('../assets/img/carousel-3.jpg')});
+                :style="`background-image: url(${require('@/assets/img/carousel-3.jpg')});
         background-size: cover;`"
               >
                 <div
@@ -655,12 +655,12 @@
 </template>
 
 <script>
-import "../assets/js/plugins/chartjs.min";
-import "../assets/js/argon-dashboard.min.js";
+import "@/assets/js/plugins/chartjs.min";
+import "@/assets/js/argon-dashboard.min.js";
 
-import flagUS from '../assets/img/icons/flags/US.png';
-import flagBR from '../assets/img/icons/flags/BR.png';
-import flagDE from '../assets/img/icons/flags/DE.png';
+import flagUS from '@/assets/img/icons/flags/US.png';
+import flagBR from '@/assets/img/icons/flags/BR.png';
+import flagDE from '@/assets/img/icons/flags/DE.png';
 
 export default {
   name: "ComDashBoard",

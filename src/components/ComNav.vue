@@ -115,8 +115,8 @@
   </nav>
 </template>
 <script>
-import imgTeam2 from '../assets/img/team-2.jpg'
-import logoSpotify from '../assets/img/small-logos/logo-spotify.svg';
+import imgTeam2 from '@/assets/img/team-2.jpg'
+import logoSpotify from '@/assets/img/small-logos/logo-spotify.svg';
 export default {
 
     name: 'com-nav',

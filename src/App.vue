@@ -30,14 +30,14 @@
   </div>
 </template>
 <script>
-import "./assets/js/plugins/perfect-scrollbar.min";
-import "./assets/js/plugins/smooth-scrollbar.min";
-import "./assets/js/fontawesome_42d5adcbca";
+import "@/assets/js/plugins/perfect-scrollbar.min";
+import "@/assets/js/plugins/smooth-scrollbar.min";
+import "@/assets/js/fontawesome_42d5adcbca";
 
-import ComSideNav from "./components/ComSideNav.vue";
-import ComNav from "./components/ComNav.vue";
-import ComHeader from "./components/ComHeader.vue";
-import ComFooter from "./components/ComFooter.vue";
+import ComSideNav from "@/components/ComSideNav.vue";
+import ComNav from "@/components/ComNav.vue";
+import ComHeader from "@/components/ComHeader.vue";
+import ComFooter from "@/components/ComFooter.vue";
 export default {
   name: "app",
   data() {
@@ -53,7 +53,7 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style>
 @import './assets/css/nucleo-icons.css';
 @import './assets/css/nucleo-svg.css';
 @import './assets/css/argon-dashboard.css';

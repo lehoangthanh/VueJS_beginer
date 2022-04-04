@@ -219,8 +219,8 @@
   </aside>
 </template>
 <script>
-import logoCtDark from "../assets/img/logo-ct-dark.png";
-import iconDoc from "../assets/img/illustrations/icon-documentation.svg";
+import logoCtDark from "@/assets/img/logo-ct-dark.png";
+import iconDoc from "@/assets/img/illustrations/icon-documentation.svg";
 
 export default {
   name: "ComSideNav",

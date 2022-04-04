@@ -101,6 +101,7 @@
     </div>
   </div>
 </div>
+
 </template>
 <script>
 import { ACTION_TYPES } from '../../store/modules/user'

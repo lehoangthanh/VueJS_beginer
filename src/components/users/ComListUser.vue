@@ -15,6 +15,7 @@
                   <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Gender</th>
                   <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Address</th>
                   <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Online</th>
+                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Edit</th>
                 </tr>
               </thead>
               <tbody>
@@ -25,7 +26,9 @@
                         <img :src="user.avatar" class="avatar avatar-sm me-3" alt="user1">
                       </div>
                       <div class="d-flex flex-column justify-content-center">
-                        <h6 class="mb-0 text-sm">{{ user.name }}</h6>
+                        <h6 class="mb-0 text-sm">
+                          <router-link :to="{ name: 'users.profile', params: { id: user.id }}">{{ user.name }}</router-link>
+                        </h6>
                         <p class="text-xs font-weight-bold mb-0">{{ `ID: ` + user.id }}</p>
                         <p class="text-xs text-secondary mb-0">{{ `Username: ` + user.username }}</p>
                       </div>
@@ -43,7 +46,9 @@
                   <td class="text-xs font-weight-bold mb-0">
                     <span :class="`badge badge-sm ${isOnline()}`">Online</span>
                   </td>
-
+                  <!-- <td>
+                    <p class="text-xs font-weight-bold mb-0 btn-edit"><button class="btn btn-warning ">Edit</button></p>
+                  </td> -->
                 </tr>
                 <!-- <tr>
                   <td>

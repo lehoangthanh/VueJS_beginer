@@ -12,6 +12,7 @@ const state = {
 
 const getters = {
   getUserProfile(state) {
+console.log('=====getUserProfile', state.user)
     return state.user
   },
   userList(state) {

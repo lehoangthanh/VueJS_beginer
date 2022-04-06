@@ -1,6 +1,6 @@
 <template>
 <div>
-  <div class="card shadow-lg mx-4 card-profile-bottom">
+  <div v-if="user" class="card shadow-lg mx-4 card-profile-bottom">
     <div class="card-body p-3">
       <div class="row gx-4">
         <div class="col-auto">
@@ -105,61 +105,62 @@
 </template>
 <script>
 import { ACTION_TYPES } from '../../store/modules/user'
+import { mapGetters, mapState } from 'vuex'
 
 export default {
 	name: 'com-user-detail',
 	data() {
 		return {
 			uID: this.$route.params.id,
-			user: {}
+			state: this.$store.state
 		}
 	},
   computed: {
     user() {
-      this.user = this.$store.getters["users/getUserProfile"];
-      return this.user;
-    }
-  //   getUserProfile() {
-  //     this.user = this.$store.getters['users/getUserProfile'];
-  //     return this.user
-  //   }
+      return this.state.user.user
+      // return this.$store.getters['users/getUserProfile']
+    },
   },
-  // watch: {
-  //   user(val) {
-  //       this.user = val;
-  //   }
+  // computed: {
+  //   ...mapState([
+  //     'user'
+  //     ])
   // },
-	methods: {
-		async fetchUserProfile() {
-      try{
-        const user = await this.axios.get(`users/${this.uID}`);
-        this.$store.dispatch(`user/${ACTION_TYPES.GET_USER_BY_ID}`, user);
+
+    methods: {
+      async fetchUserProfile() {
+        try{
+          const user = await this.axios.get(`users/${this.uID}`);
+          await this.$store.dispatch(`user/${ACTION_TYPES.GET_USER_BY_ID}`, user)
+          // const _u = await this.$store.getters['users/getUserProfile']
+          //  console.log('===u====', _u)
+        }
+        catch (e) {
+          console.log(e)
+        }
+      },
+      getUserProfile() {
+        this.user = this.$store.getters["users/getUserProfile"];
       }
-      catch (e) {
-        console.log(e)
-      }
+    },
 
-		}
-	},
-	beforeCreate() {
-    console.log("==beforeCreate===");
-  },
+    beforeCreate() {
+      // console.log("==beforeCreate===");
+    },
 
-  beforeMount() {
-    console.log("==beforeMount===");
-  },
+    created() {
+      this.fetchUserProfile();
+      // console.log("==created===");
+    },
 
-  mounted() {
-    this.fetchUserProfile();
-    this.user = this.$store.getters['users/getUserProfile'];
-    console.log("==mounted===");
-  },
+    beforeMount() {
+      // console.log("==beforeMount===");
+    },
 
-  created() {
+    mounted() {
+      // console.log("==mounted===");
+    },
 
-    console.log("==created===");
-  },
-  
 }
 </script>
 <style>

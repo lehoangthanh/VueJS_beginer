@@ -3,34 +3,107 @@
     <div class="col-12">
       <div class="card mb-4">
         <div class="card-header pb-0">
-                  <h6>Authors table</h6>
-          </div>
+          <h6>Authors table</h6>
+        </div>
         <div class="card-body px-0 pt-0 pb-2">
+          <div v-if="isLoading" class="d-flex justify-content-center">
+            <div class=" spinner-border text-primary" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </div>
+          </div>
           <div class="table-responsive p-0">
             <table class="table align-items-center mb-0">
               <thead>
                 <tr>
-                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">ID</th>
-                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Age</th>
-                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Gender</th>
-                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Address</th>
-                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Online</th>
-                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Edit</th>
+                  <th
+                    class="
+                      text-uppercase text-secondary text-xxs
+                      font-weight-bolder
+                      opacity-7
+                      ps-2
+                    "
+                  >
+                    ID
+                  </th>
+                  <th
+                    class="
+                      text-uppercase text-secondary text-xxs
+                      font-weight-bolder
+                      opacity-7
+                      ps-2
+                    "
+                  >
+                    Age
+                  </th>
+                  <th
+                    class="
+                      text-uppercase text-secondary text-xxs
+                      font-weight-bolder
+                      opacity-7
+                      ps-2
+                    "
+                  >
+                    Gender
+                  </th>
+                  <th
+                    class="
+                      text-uppercase text-secondary text-xxs
+                      font-weight-bolder
+                      opacity-7
+                      ps-2
+                    "
+                  >
+                    Address
+                  </th>
+                  <th
+                    class="
+                      text-uppercase text-secondary text-xxs
+                      font-weight-bolder
+                      opacity-7
+                      ps-2
+                    "
+                  >
+                    Online
+                  </th>
+                  <th
+                    class="
+                      text-uppercase text-secondary text-xxs
+                      font-weight-bolder
+                      opacity-7
+                      ps-2
+                    "
+                  >
+                    Edit
+                  </th>
                 </tr>
               </thead>
               <tbody>
-                <tr v-for="user in userList" :key="user.id">
+                <tr v-for="user in getUserList" :key="user.id">
                   <td>
                     <div class="d-flex px-2 py-1">
                       <div>
-                        <img :src="user.avatar" class="avatar avatar-sm me-3" alt="user1">
+                        <img
+                          :src="user.avatar"
+                          class="avatar avatar-sm me-3"
+                          alt="user1"
+                        />
                       </div>
                       <div class="d-flex flex-column justify-content-center">
                         <h6 class="mb-0 text-sm">
-                          <router-link :to="{ name: 'users.profile', params: { id: user.id }}">{{ user.name }}</router-link>
+                          <router-link
+                            :to="{
+                              name: 'users.profile',
+                              params: { id: user.id },
+                            }"
+                            >{{ user.name }}</router-link
+                          >
                         </h6>
-                        <p class="text-xs font-weight-bold mb-0">{{ `ID: ` + user.id }}</p>
-                        <p class="text-xs text-secondary mb-0">{{ `Username: ` + user.username }}</p>
+                        <p class="text-xs font-weight-bold mb-0">
+                          {{ `ID: ` + user.id }}
+                        </p>
+                        <p class="text-xs text-secondary mb-0">
+                          {{ `Username: ` + user.username }}
+                        </p>
                       </div>
                     </div>
                   </td>
@@ -38,10 +111,14 @@
                     <p class="text-xs font-weight-bold mb-0">{{ user.age }}</p>
                   </td>
                   <td>
-                    <p class="text-xs font-weight-bold mb-0">{{ user.gender }}</p>
+                    <p class="text-xs font-weight-bold mb-0">
+                      {{ user.gender }}
+                    </p>
                   </td>
                   <td>
-                    <p class="text-xs font-weight-bold mb-0">{{ user.address }}</p>
+                    <p class="text-xs font-weight-bold mb-0">
+                      {{ user.address }}
+                    </p>
                   </td>
                   <td class="text-xs font-weight-bold mb-0">
                     <span :class="`badge badge-sm ${isOnline()}`">Online</span>
@@ -97,31 +174,69 @@ export default {
   data() {
     return {
       userList: [],
+      isLoading: true,
     };
   },
-  methods: {
+  computed: {
     getUserList() {
-      this.$store.dispatch(`user/${ACTION_TYPES.GET_USER_LIST}`);
       this.userList = this.$store.getters["user/userList"];
+
+      setTimeout(() => {
+        this.isLoading = false;
+      }, 1000)
+
+      return this.userList;
     },
+  },
+
+  methods: {
+    async fetchUserList() {
+      try {
+        const users = await this.axios.get("/users");
+        this.$store.dispatch(`user/${ACTION_TYPES.GET_USER_LIST}`, users);
+      } catch (e) {
+        conosle.log(e);
+      }
+    },
+
+    // getUserList() {
+    //   return this.$store.getters['user/userList'];
+    // },
+
     isOnline() {
       const min = 0;
       const max = 1;
-       return Math.floor(Math.random() * (max - min + 1) + min) === 1 ? 'bg-gradient-success' : 'bg-gradient-secondary'
+      return Math.floor(Math.random() * (max - min + 1) + min) === 1
+        ? "bg-gradient-success"
+        : "bg-gradient-secondary";
     },
+
     textOnline(status) {
-      switch(status) {
-        case 'bg-gradient-success': {
-            return 'Online'
-        };
-        case 'bg-gradient-secondary': {
-          return 'Offline'
+      switch (status) {
+        case "bg-gradient-success": {
+          return "Online";
+        }
+        case "bg-gradient-secondary": {
+          return "Offline";
         }
       }
-    }
+    },
   },
+  beforeCreate() {
+    console.log("==beforeCreate===");
+  },
+
+  beforeMount() {
+    console.log("==beforeMount===");
+  },
+
   mounted() {
-    this.getUserList();
+    console.log("==mounted===");
+  },
+
+  created() {
+    this.fetchUserList();
+    console.log("==created===");
   },
 };
 </script>

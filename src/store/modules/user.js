@@ -29,8 +29,8 @@ const mutations = {
         state.user = state.userList.find(u => Number(u.id) === Number(uID))
     },
 
-    [MUTATION_TYPES.GET_USER_LIST] (state) {
-      state.userList = userListTmp
+    [MUTATION_TYPES.GET_USER_LIST] (state, users) {
+      state.userList = users || []
     },
 }
 
@@ -44,8 +44,8 @@ const actions = {
     commit(MUTATION_TYPES.GET_USER_BY_ID, { uID })
   },
 
-  [ACTION_TYPES.GET_USER_LIST] ({ commit }) {
-    commit(MUTATION_TYPES.GET_USER_LIST)
+  [ACTION_TYPES.GET_USER_LIST] ({ commit }, users) {
+    commit(MUTATION_TYPES.GET_USER_LIST, users.data)
   },
 }
 

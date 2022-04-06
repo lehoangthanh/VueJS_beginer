@@ -95,14 +95,14 @@
                               name: 'users.profile',
                               params: { id: user.id },
                             }"
-                            >{{ user.name }}</router-link
+                            >{{ user.email }}</router-link
                           >
                         </h6>
                         <p class="text-xs font-weight-bold mb-0">
                           {{ `ID: ` + user.id }}
                         </p>
                         <p class="text-xs text-secondary mb-0">
-                          {{ `Username: ` + user.username }}
+                          {{ `Email: ` + user.email }}
                         </p>
                       </div>
                     </div>
@@ -179,7 +179,7 @@ export default {
   },
   computed: {
     getUserList() {
-      this.userList = this.$store.getters["user/userList"];
+      this.userList = this.$store.getters['user/userList'];
 
       setTimeout(() => {
         this.isLoading = false;

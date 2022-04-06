@@ -110,20 +110,56 @@ export default {
 	name: 'com-user-detail',
 	data() {
 		return {
-			id: this.$route.params.id,
+			uID: this.$route.params.id,
 			user: {}
 		}
 	},
+  computed: {
+    user() {
+      this.user = this.$store.getters["users/getUserProfile"];
+      return this.user;
+    }
+  //   getUserProfile() {
+  //     this.user = this.$store.getters['users/getUserProfile'];
+  //     return this.user
+  //   }
+  },
+  // watch: {
+  //   user(val) {
+  //       this.user = val;
+  //   }
+  // },
 	methods: {
-		getUserByID() {
-			this.$store.dispatch(`user/${ACTION_TYPES.GET_USER_LIST}`);
-			this.$store.dispatch(`user/${ACTION_TYPES.GET_USER_BY_ID}`, this.id);
-			this.user = this.$store.getters['user/getUserByID'];
+		async fetchUserProfile() {
+      try{
+        const user = await this.axios.get(`users/${this.uID}`);
+        this.$store.dispatch(`user/${ACTION_TYPES.GET_USER_BY_ID}`, user);
+      }
+      catch (e) {
+        console.log(e)
+      }
+
 		}
 	},
-	mounted() {
-		this.getUserByID();
-	}
+	beforeCreate() {
+    console.log("==beforeCreate===");
+  },
+
+  beforeMount() {
+    console.log("==beforeMount===");
+  },
+
+  mounted() {
+    this.fetchUserProfile();
+    this.user = this.$store.getters['users/getUserProfile'];
+    console.log("==mounted===");
+  },
+
+  created() {
+
+    console.log("==created===");
+  },
+  
 }
 </script>
 <style>

@@ -48,6 +48,7 @@ const mutations = {
 export const ACTION_TYPES = {
   GET_USER_BY_ID: '@GET/USER_BY_ID',
   GET_USER_LIST: '@GET/USER_LIST',
+  UPDATE_USER_PROFILE: '@PUT/UPDATE_USER_PROFILE',
 }
 
 const actions = {
@@ -57,7 +58,7 @@ const actions = {
       // Response from BE
       setIsLoading(false)
       commit(MUTATION_TYPES.GET_USER_BY_ID, response.data)
-    }).catch(e => {
+    }).catch(error => {
       throw new Error(`API ${error}`);
     })
   },
@@ -68,7 +69,18 @@ const actions = {
       // Response from BE
       setIsLoading(false)
       commit(MUTATION_TYPES.GET_USER_LIST, response.data)
-    }).catch(e => {
+    }).catch(error => {
+      throw new Error(`API ${error}`);
+    })
+  },
+
+  [ACTION_TYPES.UPDATE_USER_PROFILE]({ commit }) {
+    setIsLoading(true)
+    Vue.axios.put(`users/${state.user.id}`, state.user).then(response => {
+      // Response from BE
+      setIsLoading(false)
+      // commit(MUTATION_TYPES.GET_USER_LIST, response.data)
+    }).catch(error => {
       throw new Error(`API ${error}`);
     })
   },

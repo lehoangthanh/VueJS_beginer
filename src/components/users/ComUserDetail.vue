@@ -54,9 +54,12 @@
                 <div class="card-header pb-0">
                   <div class="d-flex align-items-center">
                     <p class="mb-0">Edit Profile</p>
-                    <router-link to="/users/list" class="btn-sm ms-auto">
-                      <button class="btn btn-primary">BACK</button>
-                    </router-link>    
+                    <div class="ms-auto">
+                      <button class="btn btn-info" :disabled="isLoading" @click="updateProfile">Save</button>
+                      <router-link to="/users/list" class="btn btn-primary">
+                        BACK
+                      </router-link>
+                    </div>
                   </div>
                 </div>
                 <div class="card-body">
@@ -71,19 +74,19 @@
                     <div class="col-md-6">
                       <div class="form-group">
                         <label for="example-text-input" class="form-control-label">Email</label>
-                        <input class="form-control" type="email" :value="user.email">
+                        <input class="form-control" type="email" disabled :value="user.email">
                       </div>
                     </div>
                     <div class="col-md-6">
                       <div class="form-group">
                         <label for="example-text-input" class="form-control-label">Age</label>
-                        <input class="form-control" type="text" :value="user.age">
+                        <input class="form-control" type="number" v-model="user.age">
                       </div>
                     </div>
                     <div class="col-md-6">
                       <div class="form-group">
                         <label for="example-text-input" class="form-control-label">Gender</label>
-                        <input class="form-control" type="text" :value="user.gender">
+                        <input class="form-control" type="text" disabled :value="user.gender">
                       </div>
                     </div>
                   </div>
@@ -98,13 +101,28 @@
             <div class="col-md-6">
               <div class="form-group">
                 <label for="example-text-input" class="form-control-label">Address</label>
-                <input class="form-control" type="text" :value="user.address">
+                <input class="form-control" type="text" v-model="user.address">
               </div>
             </div>
           </div>
       </div>
     </div>
   </div>
+  <div aria-live="polite" aria-atomic="true" style="position: relative; min-height: 200px;">
+  <div class="toast" style="position: absolute; top: 0; right: 0;">
+    <div class="toast-header">
+      <span class="rounded mr-2" alt="..."></span>
+      <strong class="mr-auto">Update User Success</strong>
+      <!-- <small>11 mins ago</small> -->
+      <!-- <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button> -->
+    </div>
+    <!-- <div class="toast-body">
+      Hello, world! This is a toast message.
+    </div> -->
+  </div>
+</div>
 </div>
 
 </template>
@@ -132,7 +150,9 @@ export default {
   // },
 
     methods: {
-
+      async updateProfile() {
+          this.$store.dispatch(`user/${ACTION_TYPES.UPDATE_USER_PROFILE}`)
+      },
     },
 
     beforeCreate() {

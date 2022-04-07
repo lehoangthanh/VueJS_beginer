@@ -1,4 +1,5 @@
-import userListTmp from '../../mock/user'
+import Vue from 'vue'
+
 const state = {
   user: {
     id: 0,
@@ -7,49 +8,74 @@ const state = {
     age: 0,
     address: '',
   },
-  userList: []
+  userList: [],
+  isLoading: false,
 }
 
+export const GETTER_TYPES = {
+  GET_USER_BY_ID: 'GET/USER_BY_ID',
+  GET_USER_LIST: 'GET/USER_LIST',
+  GET_IS_LOADING: 'GET/IS_LOADING',
+}
 const getters = {
-  getUserProfile(state) {
-console.log('=====getUserProfile', state.user)
+  [GETTER_TYPES.GET_USER_BY_ID](state) {
     return state.user
   },
-  userList(state) {
+
+  [GETTER_TYPES.GET_USER_LIST](state) {
     return state.userList
   },
+  [GETTER_TYPES.GET_IS_LOADING](state) {
+    return state.isLoading
+  }
 }
 
 export const MUTATION_TYPES = {
-    GET_USER_BY_ID: 'GET/USER_BY_ID',
-    GET_USER_LIST: 'GET/USER_LIST',
+  GET_USER_BY_ID: 'GET/USER_BY_ID',
+  GET_USER_LIST: 'GET/USER_LIST',
 }
 
 const mutations = {
-    [MUTATION_TYPES.GET_USER_BY_ID] (state, user) {
-      console.log('=====MUTATION_TYPES', user)
-        state.user = user
-    },
+  [MUTATION_TYPES.GET_USER_BY_ID](state, user) {
+    state.user = user
+  },
 
-    [MUTATION_TYPES.GET_USER_LIST] (state, users) {
-      state.userList = users || []
-    },
+  [MUTATION_TYPES.GET_USER_LIST](state, users) {
+    state.userList = users || []
+  },
 }
 
 export const ACTION_TYPES = {
   GET_USER_BY_ID: '@GET/USER_BY_ID',
-  GET_USER_LIST: '@GET/USER_LIST'
+  GET_USER_LIST: '@GET/USER_LIST',
 }
 
 const actions = {
-  [ACTION_TYPES.GET_USER_BY_ID] ({ commit }, userRequest) {
-    console.log('=====userRequest', userRequest)
-    commit(MUTATION_TYPES.GET_USER_BY_ID, userRequest.data)
+  [ACTION_TYPES.GET_USER_BY_ID]({ commit }, uID) {
+    setIsLoading(true)
+    Vue.axios.get(`users/${uID}`).then(response => {
+      // Response from BE
+      setIsLoading(false)
+      commit(MUTATION_TYPES.GET_USER_BY_ID, response.data)
+    }).catch(e => {
+      throw new Error(`API ${error}`);
+    })
   },
 
-  [ACTION_TYPES.GET_USER_LIST] ({ commit }, usersRequest) {
-    commit(MUTATION_TYPES.GET_USER_LIST, usersRequest.data)
+  [ACTION_TYPES.GET_USER_LIST]({ commit }) {
+    setIsLoading(true)
+    Vue.axios.get(`users`).then(response => {
+      // Response from BE
+      setIsLoading(false)
+      commit(MUTATION_TYPES.GET_USER_LIST, response.data)
+    }).catch(e => {
+      throw new Error(`API ${error}`);
+    })
   },
+}
+
+const setIsLoading = (status) => {
+  state.isLoading = status;
 }
 
 export default {

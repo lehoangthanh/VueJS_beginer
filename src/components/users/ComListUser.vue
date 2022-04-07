@@ -78,7 +78,7 @@
                 </tr>
               </thead>
               <tbody>
-                <tr v-for="user in getUserList" :key="user.id">
+                <tr v-for="user in users" :key="user.id">
                   <td>
                     <div class="d-flex px-2 py-1">
                       <div>
@@ -164,45 +164,25 @@
   </div>
 </template>
 <script>
-import VueTypes from "vue-types";
-import { ACTION_TYPES } from "../../store/modules/user";
+import { ACTION_TYPES, GETTER_TYPES } from "../../store/modules/user";
 export default {
   name: "com-list-user",
-  // props: {
-  //     userList: VueTypes.array.def([])
-  // },
+
   data() {
     return {
-      userList: [],
-      isLoading: true,
+
     };
   },
   computed: {
-    getUserList() {
-      this.userList = this.$store.getters['user/userList'];
-
-      setTimeout(() => {
-        this.isLoading = false;
-      }, 1000)
-
-      return this.userList;
+    users() {
+      return this.$store.getters[`user/${GETTER_TYPES.GET_USER_LIST}`];
     },
+    isLoading() {
+      return this.$store.getters[`user/${GETTER_TYPES.GET_IS_LOADING}`]
+    }
   },
 
   methods: {
-    async fetchUserList() {
-      try {
-        const users = await this.axios.get("/users");
-        this.$store.dispatch(`user/${ACTION_TYPES.GET_USER_LIST}`, users);
-      } catch (e) {
-        conosle.log(e);
-      }
-    },
-
-    // getUserList() {
-    //   return this.$store.getters['user/userList'];
-    // },
-
     isOnline() {
       const min = 0;
       const max = 1;
@@ -235,7 +215,7 @@ export default {
   },
 
   created() {
-    this.fetchUserList();
+    this.$store.dispatch(`user/${ACTION_TYPES.GET_USER_LIST}`);
     console.log("==created===");
   },
 };

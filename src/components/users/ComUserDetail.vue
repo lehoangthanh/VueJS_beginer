@@ -4,7 +4,12 @@
     <div class="card-body p-3">
       <div class="row gx-4">
         <div class="col-auto">
-          <div class="avatar avatar-xl position-relative">
+          <div v-if="isLoading" class="d-flex justify-content-center">
+            <div class=" spinner-border text-primary" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </div>
+          </div>
+          <div v-else class="avatar avatar-xl position-relative">
             <img :src="user.avatar" alt="profile_image" class="w-100 border-radius-lg shadow-sm">
           </div>
         </div>
@@ -65,8 +70,8 @@
                     </div>
                     <div class="col-md-6">
                       <div class="form-group">
-                        <label for="example-text-input" class="form-control-label">Username</label>
-                        <input class="form-control" type="email" :value="user.username">
+                        <label for="example-text-input" class="form-control-label">Email</label>
+                        <input class="form-control" type="email" :value="user.email">
                       </div>
                     </div>
                     <div class="col-md-6">
@@ -104,44 +109,30 @@
 
 </template>
 <script>
-import { ACTION_TYPES } from '../../store/modules/user'
-import { mapGetters, mapState } from 'vuex'
+import { ACTION_TYPES, GETTER_TYPES } from '@/store/modules/user'
+// import { mapGetters, mapState } from 'vuex'
 
 export default {
 	name: 'com-user-detail',
 	data() {
 		return {
 			uID: this.$route.params.id,
-			state: this.$store.state
 		}
 	},
   computed: {
     user() {
-      return this.state.user.user
-      // return this.$store.getters['users/getUserProfile']
+      return this.$store.getters[`user/${GETTER_TYPES.GET_USER_BY_ID}`]
     },
+    isLoading() {
+      return this.$store.getters[`user/${GETTER_TYPES.GET_IS_LOADING}`]
+    }
   },
   // computed: {
-  //   ...mapState([
-  //     'user'
-  //     ])
+  //   ...mapState(['user'])
   // },
 
     methods: {
-      async fetchUserProfile() {
-        try{
-          const user = await this.axios.get(`users/${this.uID}`);
-          await this.$store.dispatch(`user/${ACTION_TYPES.GET_USER_BY_ID}`, user)
-          // const _u = await this.$store.getters['users/getUserProfile']
-          //  console.log('===u====', _u)
-        }
-        catch (e) {
-          console.log(e)
-        }
-      },
-      getUserProfile() {
-        this.user = this.$store.getters["users/getUserProfile"];
-      }
+
     },
 
     beforeCreate() {
@@ -149,7 +140,7 @@ export default {
     },
 
     created() {
-      this.fetchUserProfile();
+      this.$store.dispatch(`user/${ACTION_TYPES.GET_USER_BY_ID}`, this.uID)
       // console.log("==created===");
     },
 

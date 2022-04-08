@@ -82,7 +82,7 @@ const actions = {
     setIsLoading(true)
     Vue.axios.put(`users/${state.user.id}`, state.user).then(response => {
       // Response from BE
-      Vue.$toast(`Update user ${state.user.name} success`, {
+      Vue.$toast(`Update user ${state.user.firstName} ${state.user.lastName} success`, {
         type: TYPE.INFO,
         position: POSITION.TOP_CENTER,
       });

@@ -1,12 +1,16 @@
 import Vue from 'vue'
+import { POSITION, TYPE } from "vue-toastification"
 
 const state = {
   user: {
     id: 0,
-    username: '',
+    email: '',
     name: '',
     age: 0,
     address: '',
+    avatar: '',
+    password: '',
+    gender: '',
   },
   userList: [],
   isLoading: false,
@@ -78,10 +82,20 @@ const actions = {
     setIsLoading(true)
     Vue.axios.put(`users/${state.user.id}`, state.user).then(response => {
       // Response from BE
+      Vue.$toast(`Update user ${state.user.name} success`, {
+        timeout: 2000,
+        type: TYPE.INFO,
+        position: POSITION.TOP_CENTER,
+      });
       setIsLoading(false)
       // commit(MUTATION_TYPES.GET_USER_LIST, response.data)
     }).catch(error => {
-      throw new Error(`API ${error}`);
+      setIsLoading(false)
+      Vue.$toast(`API ${error.message}`, {
+        timeout: 2000,
+        type: TYPE.ERROR,
+        position: POSITION.TOP_CENTER,
+      });
     })
   },
 }

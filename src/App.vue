@@ -38,6 +38,7 @@ import ComSideNav from "@/components/ComSideNav.vue";
 import ComNav from "@/components/ComNav.vue";
 import ComHeader from "@/components/ComHeader.vue";
 import ComFooter from "@/components/ComFooter.vue";
+
 export default {
   name: "app",
   data() {

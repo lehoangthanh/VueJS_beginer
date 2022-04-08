@@ -17,7 +17,7 @@ Vue.use(BootstrapVue)
 Vue.use(BootstrapVueIcons)
 
 Vue.use(Toast, {
-  timeout: 2000,
+  timeout: 1500,
 });
 
 axios.defaults.baseURL = 'https://ts.thanhlh.selfip.com'

@@ -83,7 +83,6 @@ const actions = {
     Vue.axios.put(`users/${state.user.id}`, state.user).then(response => {
       // Response from BE
       Vue.$toast(`Update user ${state.user.name} success`, {
-        timeout: 2000,
         type: TYPE.INFO,
         position: POSITION.TOP_CENTER,
       });
@@ -92,7 +91,6 @@ const actions = {
     }).catch(error => {
       setIsLoading(false)
       Vue.$toast(`API ${error.message}`, {
-        timeout: 2000,
         type: TYPE.ERROR,
         position: POSITION.TOP_CENTER,
       });

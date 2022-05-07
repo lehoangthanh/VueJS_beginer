@@ -11,7 +11,7 @@
             </div>
             <div v-else class="avatar avatar-xl position-relative">
               <img
-                :src="user.avatar"
+                :src="user.avartar"
                 alt="profile_image"
                 class="w-100 border-radius-lg shadow-sm"
               />
@@ -32,16 +32,7 @@
               <ul class="nav nav-pills nav-fill p-1" role="tablist">
                 <li class="nav-item">
                   <a
-                    class="
-                      nav-link
-                      mb-0
-                      px-0
-                      py-1
-                      active
-                      d-flex
-                      align-items-center
-                      justify-content-center
-                    "
+                    class="nav-link mb-0 px-0 py-1 active d-flex align-items-center justify-content-center"
                     data-bs-toggle="tab"
                     href="javascript:;"
                     role="tab"
@@ -53,15 +44,7 @@
                 </li>
                 <li class="nav-item">
                   <a
-                    class="
-                      nav-link
-                      mb-0
-                      px-0
-                      py-1
-                      d-flex
-                      align-items-center
-                      justify-content-center
-                    "
+                    class="nav-link mb-0 px-0 py-1 d-flex align-items-center justify-content-center"
                     data-bs-toggle="tab"
                     href="javascript:;"
                     role="tab"
@@ -73,15 +56,7 @@
                 </li>
                 <li class="nav-item">
                   <a
-                    class="
-                      nav-link
-                      mb-0
-                      px-0
-                      py-1
-                      d-flex
-                      align-items-center
-                      justify-content-center
-                    "
+                    class="nav-link mb-0 px-0 py-1 d-flex align-items-center justify-content-center"
                     data-bs-toggle="tab"
                     href="javascript:;"
                     role="tab"
@@ -128,7 +103,7 @@
                           <input
                             class="form-control"
                             type="text"
-                            :value="user.id"
+                            :value="user._id"
                             disabled
                           />
                         </div>
@@ -145,6 +120,34 @@
                             type="email"
                             disabled
                             :value="user.email"
+                          />
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label
+                            for="example-text-input"
+                            class="form-control-label"
+                            >Frist Name</label
+                          >
+                          <input
+                            class="form-control"
+                            type="email"
+                            :value="user.firstName"
+                          />
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label
+                            for="example-text-input"
+                            class="form-control-label"
+                            >Last Name</label
+                          >
+                          <input
+                            class="form-control"
+                            type="email"
+                            :value="user.lastName"
                           />
                         </div>
                       </div>
@@ -224,7 +227,7 @@
   </div>
 </template>
 <script>
-import { ACTION_TYPES, GETTER_TYPES } from "@/store/modules/user"
+import { ACTION_TYPES, GETTER_TYPES } from "@/store/modules/user";
 
 export default {
   name: "com-user-detail",
@@ -247,7 +250,7 @@ export default {
 
   methods: {
     async updateProfile() {
-      this.$store.dispatch(`user/${ACTION_TYPES.UPDATE_USER_PROFILE}`)
+      this.$store.dispatch(`user/${ACTION_TYPES.UPDATE_USER_PROFILE}`, this.uID);
     },
   },
 
@@ -269,5 +272,4 @@ export default {
   },
 };
 </script>
-<style>
-</style>
+<style></style>

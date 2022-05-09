@@ -7,7 +7,7 @@
         </div>
         <div class="card-body px-0 pt-0 pb-2">
           <div v-if="isLoading" class="d-flex justify-content-center">
-            <div class=" spinner-border text-primary" role="status">
+            <div class="spinner-border text-primary" role="status">
               <span class="visually-hidden">Loading...</span>
             </div>
           </div>
@@ -16,64 +16,34 @@
               <thead>
                 <tr>
                   <th
-                    class="
-                      text-uppercase text-secondary text-xxs
-                      font-weight-bolder
-                      opacity-7
-                      ps-2
-                    "
+                    class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2"
                   >
                     ID
                   </th>
                   <th
-                    class="
-                      text-uppercase text-secondary text-xxs
-                      font-weight-bolder
-                      opacity-7
-                      ps-2
-                    "
+                    class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2"
                   >
                     Age
                   </th>
                   <th
-                    class="
-                      text-uppercase text-secondary text-xxs
-                      font-weight-bolder
-                      opacity-7
-                      ps-2
-                    "
+                    class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2"
                   >
                     Gender
                   </th>
                   <th
-                    class="
-                      text-uppercase text-secondary text-xxs
-                      font-weight-bolder
-                      opacity-7
-                      ps-2
-                    "
+                    class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2"
                   >
                     Address
                   </th>
                   <th
-                    class="
-                      text-uppercase text-secondary text-xxs
-                      font-weight-bolder
-                      opacity-7
-                      ps-2
-                    "
+                    class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2"
                   >
                     Online
                   </th>
                   <th
-                    class="
-                      text-uppercase text-secondary text-xxs
-                      font-weight-bolder
-                      opacity-7
-                      ps-2
-                    "
+                    class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2"
                   >
-                    Edit
+                    Delete
                   </th>
                 </tr>
               </thead>
@@ -83,7 +53,7 @@
                     <div class="d-flex px-2 py-1">
                       <div>
                         <img
-                          :src="user.avatar"
+                          :src="user.avartar"
                           class="avatar avatar-sm me-3"
                           alt="user1"
                         />
@@ -93,13 +63,13 @@
                           <router-link
                             :to="{
                               name: 'users.profile',
-                              params: { id: user.id },
+                              params: { id: user._id },
                             }"
                             >{{ user.email }}</router-link
                           >
                         </h6>
                         <p class="text-xs font-weight-bold mb-0">
-                          {{ `ID: ` + user.id }}
+                          {{ `ID: ` + user._id }}
                         </p>
                         <p class="text-xs text-secondary mb-0">
                           {{ `Email: ` + user.email }}
@@ -123,38 +93,15 @@
                   <td class="text-xs font-weight-bold mb-0">
                     <span :class="`badge badge-sm ${isOnline()}`">Online</span>
                   </td>
-                  <!-- <td>
-                    <p class="text-xs font-weight-bold mb-0 btn-edit"><button class="btn btn-warning ">Edit</button></p>
-                  </td> -->
+                  <td class="text-xs font-weight-bold">
+                    <button
+                      class="badge badge-sm btn btn-danger mb-auto"
+                      @click="deleteUser(user._id)"
+                    >
+                      DELETE
+                    </button>
+                  </td>
                 </tr>
-                <!-- <tr>
-                  <td>
-                    <div class="d-flex px-2 py-1">
-                      <div>
-                        <img src="@/assets/img/team-2.jpg" class="avatar avatar-sm me-3" alt="user1">
-                      </div>
-                      <div class="d-flex flex-column justify-content-center">
-                        <h6 class="mb-0 text-sm">John Michael</h6>
-                        <p class="text-xs text-secondary mb-0">john@creative-tim.com</p>
-                      </div>
-                    </div>
-                  </td>
-                  <td>
-                    <p class="text-xs font-weight-bold mb-0">Manager</p>
-                    <p class="text-xs text-secondary mb-0">Organization</p>
-                  </td>
-                  <td class="align-middle text-center text-sm">
-                    <span class="badge badge-sm bg-gradient-success">Online</span>
-                  </td>
-                  <td class="align-middle text-center">
-                    <span class="text-secondary text-xs font-weight-bold">23/04/18</span>
-                  </td>
-                  <td class="align-middle">
-                    <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
-                      Edit
-                    </a>
-                  </td>
-                </tr> -->
               </tbody>
             </table>
           </div>
@@ -169,17 +116,15 @@ export default {
   name: "com-list-user",
 
   data() {
-    return {
-
-    };
+    return {};
   },
   computed: {
     users() {
       return this.$store.getters[`user/${GETTER_TYPES.GET_USER_LIST}`];
     },
     isLoading() {
-      return this.$store.getters[`user/${GETTER_TYPES.GET_IS_LOADING}`]
-    }
+      return this.$store.getters[`user/${GETTER_TYPES.GET_IS_LOADING}`];
+    },
   },
 
   methods: {
@@ -201,6 +146,9 @@ export default {
         }
       }
     },
+    async deleteUser(uID) {
+      this.$store.dispatch(`user/${ACTION_TYPES.DELETE_USER}`, uID);
+    },
   },
   beforeCreate() {
     console.log("==beforeCreate===");
@@ -220,41 +168,3 @@ export default {
   },
 };
 </script>
-
-
-
-
-    <!-- <div class="col-md-9">
-      <div class="form-group">
-        <input
-          type="text"
-          class="form-control"
-          id="searchIP"
-          aria-describedby="emailHelp"
-          placeholder="Enter email"
-        />
-      </div>
-    </div>
-
-    <div class="col-md-9">
-      <table class="table table-striped table-hover table-responsive">
-        <thead>
-          <tr>
-            <th scope="col">ID</th>
-            <th scope="col">username</th>
-            <th scope="col">Full Name</th>
-            <th scope="col">Age</th>
-            <th scope="col">Address</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="user in userList" :key="user.id">
-            <th scope="row">{{ user.id }}</th>
-            <td>{{ user.username }}</td>
-            <td>{{ user.name }}</td>
-            <td>{{ user.age }}</td>
-            <td>{{ user.address }}</td>
-          </tr>
-        </tbody>
-      </table>
-    </div> -->

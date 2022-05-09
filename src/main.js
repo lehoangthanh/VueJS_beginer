@@ -20,7 +20,7 @@ Vue.use(Toast, {
   timeout: 1500,
 });
 
-axios.defaults.baseURL = 'https://ts.thanhlh.selfip.com'
+axios.defaults.baseURL = 'http://127.0.0.1:4000/v1/api/'
 Vue.use(VueAxios, axios)
 
 new Vue({

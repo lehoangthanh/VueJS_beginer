@@ -131,6 +131,25 @@ const actions = {
         });
       });
   },
+  [ACTION_TYPES.ADD_USER]({ commit }, newUser) {
+    setIsLoading(true);
+    Vue.axios
+      .post(`users`, newUser)
+      .then((reponse) => {
+        Vue.$toast(`Add user success`, {
+          type: TYPE.SUCCESS,
+          position: POSITION.TOP_RIGHT,
+        });
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        setIsLoading(false);
+        Vue.$toast(`API ${error}`, {
+          type: TYPE.ERROR,
+          position: POSITION.TOP_RIGHT,
+        });
+      });
+  },
 };
 
 const setIsLoading = (status) => {

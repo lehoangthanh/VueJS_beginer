@@ -84,7 +84,7 @@
                         >
                           Save
                         </button>
-                        <router-link to="/users/list" class="btn btn-primary">
+                        <router-link to="/users" class="btn btn-primary">
                           BACK
                         </router-link>
                       </div>
@@ -133,7 +133,7 @@
                           <input
                             class="form-control"
                             type="email"
-                            :value="user.firstName"
+                            v-model="user.firstName"
                           />
                         </div>
                       </div>
@@ -147,7 +147,7 @@
                           <input
                             class="form-control"
                             type="email"
-                            :value="user.lastName"
+                            v-model="user.lastName"
                           />
                         </div>
                       </div>
@@ -250,7 +250,10 @@ export default {
 
   methods: {
     async updateProfile() {
-      this.$store.dispatch(`user/${ACTION_TYPES.UPDATE_USER_PROFILE}`, this.uID);
+      this.$store.dispatch(
+        `user/${ACTION_TYPES.UPDATE_USER_PROFILE}`,
+        this.uID
+      );
     },
   },
 

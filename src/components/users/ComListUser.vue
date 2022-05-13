@@ -2,8 +2,15 @@
   <div class="row">
     <div class="col-12">
       <div class="card mb-4">
-        <div class="card-header pb-0">
-          <h6>Authors table</h6>
+        <div class="card-header pb-0 d-flex">
+          <h6 class="p-2 mr-auto">Authors table</h6>
+          <div class="ms-auto mt-2">
+            <router-link
+              :to="{ name: 'users.add' }"
+              class="badge badge-sm btn btn-success p-2"
+              >CREATE NEW USER</router-link
+            >
+          </div>
         </div>
         <div class="card-body px-0 pt-0 pb-2">
           <div v-if="isLoading" class="d-flex justify-content-center">
@@ -69,10 +76,10 @@
                           >
                         </h6>
                         <p class="text-xs font-weight-bold mb-0">
-                          {{ `ID: ` + user._id }}
+                          {{ `ID: ${user._id}` }}
                         </p>
                         <p class="text-xs text-secondary mb-0">
-                          {{ `Email: ` + user.email }}
+                          {{ `Email: ${user.email}` }}
                         </p>
                       </div>
                     </div>

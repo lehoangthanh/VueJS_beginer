@@ -60,7 +60,7 @@
                     <div class="d-flex px-2 py-1">
                       <div>
                         <img
-                          :src="user.avartar"
+                          :src="getAvatar(user.avatar)"
                           class="avatar avatar-sm me-3"
                           alt="user1"
                         />
@@ -156,6 +156,9 @@ export default {
     async deleteUser(uID) {
       this.$store.dispatch(`user/${ACTION_TYPES.DELETE_USER}`, uID);
     },
+    getAvatar(uAvatar) {
+      return `${process.env.VUE_APP_AVATAR_URL}${uAvatar}`;
+    }
   },
   beforeCreate() {
     console.log("==beforeCreate===");

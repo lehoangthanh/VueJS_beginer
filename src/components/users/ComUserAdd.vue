@@ -145,8 +145,8 @@
                     >
                     <select class="form-control" v-model="user.gender">
                       <option disabled value="">Choose One Gender</option>
-                      <option>Female</option>
-                      <option>Male</option>
+                      <option value="1">Male</option>
+                      <option value="2">Female</option>
                     </select>
                   </div>
                 </div>
@@ -186,9 +186,9 @@ export default {
         lastName: "",
         email: "",
         age: "",
-        gender: "",
+        gender: "1",
         address: "",
-        avartar: "",
+        avatar: "",
       },
     };
   },
@@ -199,8 +199,8 @@ export default {
   },
   methods: {
     selectFile() {
-      this.user.avartar = this.$refs.myFiles.files;
-      console.log(this.user.avartar);
+      if (this.$refs.myFiles.files.length < 1) return;
+      this.user.avatar = this.$refs.myFiles.files[0];
     },
     async addUser() {
       this.$store.dispatch(`user/${ACTION_TYPES.ADD_USER}`, this.user);

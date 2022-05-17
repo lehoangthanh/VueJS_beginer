@@ -11,7 +11,7 @@
             </div>
             <div v-else class="avatar avatar-xl position-relative">
               <img
-                :src="user.avartar"
+                :src="getAvatar(user.avatar)"
                 alt="profile_image"
                 class="w-100 border-radius-lg shadow-sm"
               />
@@ -255,6 +255,9 @@ export default {
         this.uID
       );
     },
+    getAvatar(uAvatar) {
+      return `${process.env.VUE_APP_AVATAR_URL}${uAvatar}`;
+    }
   },
 
   beforeCreate() {

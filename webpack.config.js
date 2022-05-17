@@ -102,13 +102,23 @@ module.exports = {
   devtool: '#eval-source-map'
 }
 
+module.exports.plugins = (module.exports.plugins || []).concat([
+  new webpack.DefinePlugin({
+    'process.env': {
+      NODE_ENV: '"develop"',
+      VUE_APP_AVATAR_URL: '"http://localhost:4000/avatar/"'
+    }
+  }),
+])
+
 if (process.env.NODE_ENV === 'production') {
   module.exports.devtool = '#source-map'
   // http://vue-loader.vuejs.org/en/workflow/production.html
   module.exports.plugins = (module.exports.plugins || []).concat([
     new webpack.DefinePlugin({
       'process.env': {
-        NODE_ENV: '"production"'
+        NODE_ENV: '"production"',
+        VUE_APP_AVATAR_URL: '"http://localhost:4000/avatar/"'
       }
     }),
     new webpack.optimize.UglifyJsPlugin({

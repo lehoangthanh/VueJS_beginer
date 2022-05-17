@@ -132,9 +132,23 @@ const actions = {
       });
   },
   [ACTION_TYPES.ADD_USER]({ commit }, newUser) {
+    const formData = new FormData();
+    Object.keys(newUser).forEach((k) => {
+      if (k == "avatar" && newUser[k]) {
+        const file = newUser[k];
+        formData.append(k, newUser[k], file.name);
+      } else {
+        formData.append(k, newUser[k]);
+      }
+    });
+
     setIsLoading(true);
     Vue.axios
-      .post(`users`, newUser)
+      .post(`users`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      })
       .then((reponse) => {
         Vue.$toast(`Add user success`, {
           type: TYPE.SUCCESS,

@@ -156,9 +156,10 @@ const actions = {
         });
         setIsLoading(false);
       })
-      .catch((error) => {
+      .catch(({response}) => {
+        const errMess = `${response.status} ${response.data.message || ''}`
         setIsLoading(false);
-        Vue.$toast(`API ${error}`, {
+        Vue.$toast(`API ${errMess}`, {
           type: TYPE.ERROR,
           position: POSITION.TOP_RIGHT,
         });

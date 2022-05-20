@@ -61,7 +61,7 @@
                       <div>
                         <img
                           :src="getAvatar(user.avatar)"
-                          class="avatar avatar-sm me-3"
+                          class="avatar avatar-sl me-3"
                           alt="user1"
                         />
                       </div>

@@ -19891,6 +19891,12 @@ fieldset:disabled .btn {
   font-size: 0.875rem;
 }
 
+.avatar-sl {
+  width: 50px !important;
+  height: 50px !important;
+  font-size: 0.875rem;
+}
+
 .avatar-sm.avatar-raised {
   margin-top: -18px;
 }

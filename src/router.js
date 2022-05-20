@@ -5,13 +5,14 @@ import ComDashBoard from "./components/ComDashBoard.vue";
 import ComListUser from "./components/users/ComListUser.vue";
 import ComUserDetail from "./components/users/ComUserDetail.vue";
 import ComUserAdd from "./components/users/ComUserAdd.vue";
+import ComLogin from "./components/ComLogin.vue";
 
 Vue.use(VueRouter);
 
-export default new VueRouter({
+export const router = new VueRouter({
   mode: "history",
   routes: [
-    //login
+    { path: "/login", name: "login", component: ComLogin },
     { path: "/", name: "dashboard", component: ComDashBoard },
     {
       path: "/users",
@@ -51,3 +52,17 @@ export default new VueRouter({
     },
   ],
 });
+
+router.beforeEach((to, from, next) => {
+  // redirect to login page if not logged in and trying to access a restricted page
+  const publicPages = ['/login', '/users'];
+  const authRequired = !publicPages.includes(to.path);
+  const loggedIn = localStorage.getItem('userAuth');
+  // const loggedIn = false;
+
+  if (authRequired && !loggedIn) {
+    return next('/login');
+  }
+
+  next();
+})

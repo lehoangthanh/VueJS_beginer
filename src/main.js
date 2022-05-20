@@ -10,9 +10,9 @@ import Toast from "vue-toastification";
 import "vue-toastification/dist/index.css";
 
 import VueAxios from 'vue-axios'
-import router from './router'
+import { router } from './router'
 import store from './store/index'
-
+console.log('=====',router)
 Vue.use(BootstrapVue)
 Vue.use(BootstrapVueIcons)
 

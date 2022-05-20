@@ -38,6 +38,7 @@ import ComSideNav from "@/components/ComSideNav.vue";
 import ComNav from "@/components/ComNav.vue";
 import ComHeader from "@/components/ComHeader.vue";
 import ComFooter from "@/components/ComFooter.vue";
+// import { GETTER_TYPES } from "./store/modules/user";
 
 export default {
   name: "app",
@@ -50,6 +51,9 @@ export default {
     ComNav,
     ComHeader,
     ComFooter,
+  },
+  created() {
+    // this.$store.dispatch(`user/${GETTER_TYPES.GET_USER_AUTH}`);
   },
 };
 </script>

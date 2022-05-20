@@ -14,12 +14,14 @@ const state = {
   },
   userList: [],
   isLoading: false,
+  userAuth: {},
 };
 
 export const GETTER_TYPES = {
   GET_USER_BY_ID: "GET/USER_BY_ID",
   GET_USER_LIST: "GET/USER_LIST",
   GET_IS_LOADING: "GET/IS_LOADING",
+  GET_USER_AUTH: "GET/USER_AUTH",
 };
 const getters = {
   [GETTER_TYPES.GET_USER_BY_ID](state) {
@@ -29,14 +31,22 @@ const getters = {
   [GETTER_TYPES.GET_USER_LIST](state) {
     return state.userList;
   },
+
   [GETTER_TYPES.GET_IS_LOADING](state) {
     return state.isLoading;
+  },
+
+  [GETTER_TYPES.GET_USER_AUTH](state) {
+    console.log('====state', state)
+    return state.userAuth;
   },
 };
 
 export const MUTATION_TYPES = {
   GET_USER_BY_ID: "GET/USER_BY_ID",
   GET_USER_LIST: "GET/USER_LIST",
+  USER_LOGIN: "USER_LOGIN",
+  USER_LOGOUT: "USER_LOGOUT",
 };
 
 const mutations = {
@@ -47,6 +57,14 @@ const mutations = {
   [MUTATION_TYPES.GET_USER_LIST](state, users) {
     state.userList = users || [];
   },
+
+  [MUTATION_TYPES.USER_LOGIN](state, userAuth) {
+    state.userAuth = userAuth || {};
+  },
+
+  [MUTATION_TYPES.USER_LOGOUT](state) {
+    state.userLisuserAutht = [];
+  },
 };
 
 export const ACTION_TYPES = {
@@ -54,9 +72,51 @@ export const ACTION_TYPES = {
   GET_USER_LIST: "@GET/USER_LIST",
   UPDATE_USER_PROFILE: "@PUT/UPDATE_USER_PROFILE",
   DELETE_USER: "@DELETE/DELETE_USER",
+  POST_USER_LOGIN: "@POST/USER_LOGIN",
+  POST_USER_LOGOUT: "@POST/USER_LOGOUT",
 };
 
 const actions = {
+  [ACTION_TYPES.POST_USER_LOGIN]({ commit }, { username, password }) {
+    Vue.axios
+    .get(`users/${username}`)
+    .then((response) => {
+      // Response from BE
+      setIsLoading(false);
+      if(password !== "Abc123") {
+        throw new Error('Worng email or password!!!')
+      }
+      response.data.token = makeid(16)
+      localStorage.setItem('userAuth', JSON.stringify(response.data));
+      commit(MUTATION_TYPES.USER_LOGIN, response.data);
+    })
+    .catch((error) => {
+      setIsLoading(false);
+      Vue.$toast(`API ${error}`, {
+        type: TYPE.ERROR,
+        position: POSITION.TOP_RIGHT,
+      });
+    });
+  },
+
+  [ACTION_TYPES.POST_USER_LOGOUT]({ commit }, uID) {
+    Vue.axios
+    .get(`users/${uID}`)
+    .then((response) => {
+      // Response from BE
+      setIsLoading(false);
+      localStorage.removeItem('userAuth');
+      commit(MUTATION_TYPES.USER_LOGOUT);
+    })
+    .catch((error) => {
+      setIsLoading(false);
+        Vue.$toast(`API ${error}`, {
+          type: TYPE.ERROR,
+          position: POSITION.TOP_RIGHT,
+        });
+    });
+  },
+
   [ACTION_TYPES.GET_USER_BY_ID]({ commit }, uID) {
     setIsLoading(true);
     Vue.axios
@@ -170,6 +230,17 @@ const actions = {
 const setIsLoading = (status) => {
   state.isLoading = status;
 };
+
+const makeid = (length) => {
+  var result           = '';
+  var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  var charactersLength = characters.length;
+  for ( var i = 0; i < length; i++ ) {
+    result += characters.charAt(Math.floor(Math.random() * charactersLength));
+  }
+  return result;
+}
+
 
 export default {
   namespaced: true,

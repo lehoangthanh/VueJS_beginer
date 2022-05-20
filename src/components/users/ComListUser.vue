@@ -132,6 +132,8 @@ export default {
     isLoading() {
       return this.$store.getters[`user/${GETTER_TYPES.GET_IS_LOADING}`];
     },
+
+
   },
 
   methods: {

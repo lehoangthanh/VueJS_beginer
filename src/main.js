@@ -19,8 +19,10 @@ Vue.use(BootstrapVueIcons)
 Vue.use(Toast, {
   timeout: 1500,
 });
+console.log('==aaa===',process.env.VUE_APP_BE_URL)
+axios.defaults.baseURL = process.env.VUE_APP_BE_URL
+axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
 
-axios.defaults.baseURL = 'http://127.0.0.1:4000/v1/api/'
 Vue.use(VueAxios, axios)
 
 new Vue({

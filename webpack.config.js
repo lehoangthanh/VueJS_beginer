@@ -106,7 +106,8 @@ module.exports.plugins = (module.exports.plugins || []).concat([
   new webpack.DefinePlugin({
     'process.env': {
       NODE_ENV: '"develop"',
-      VUE_APP_AVATAR_URL: '"http://localhost:4000/avatar/"'
+      VUE_APP_AVATAR_URL: '"http://localhost:4000/avatar/"',
+      VUE_APP_BE_URL: '"http://localhost:4000/v1/api/"'
     }
   }),
 ])
@@ -118,7 +119,8 @@ if (process.env.NODE_ENV === 'production') {
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: '"production"',
-        VUE_APP_AVATAR_URL: '"http://localhost:4000/avatar/"'
+        VUE_APP_AVATAR_URL: '"http://localhost:4000/avatar/"',
+        VUE_APP_BE_URL: '"http://localhost:4000/v1/api/"'
       }
     }),
     new webpack.optimize.UglifyJsPlugin({

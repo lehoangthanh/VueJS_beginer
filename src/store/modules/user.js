@@ -37,7 +37,6 @@ const getters = {
   },
 
   [GETTER_TYPES.GET_USER_AUTH](state) {
-    console.log('====state', state)
     return state.userAuth;
   },
 };

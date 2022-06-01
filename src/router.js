@@ -6,6 +6,9 @@ import ComListUser from "./components/users/ComListUser.vue";
 import ComUserDetail from "./components/users/ComUserDetail.vue";
 import ComUserAdd from "./components/users/ComUserAdd.vue";
 import ComLogin from "./components/ComLogin.vue";
+import ComListBook from "./components/books/ComListBook.vue";
+import ComBookDetail from "./components/books/ComBookDetail.vue";
+import ComBookAdd from "./components/books/ComBookAdd.vue";
 
 Vue.use(VueRouter);
 
@@ -50,6 +53,21 @@ export const router = new VueRouter({
         },
       ],
     },
+    {
+      path: "/books",
+      name: "books",
+      component: ComListBook,
+    },
+    {
+      path: "/books/:id",
+      name: "book_ac",
+      component: ComBookDetail,
+    },
+    {
+      path: "/books/add",
+      name: "books.add",
+      component: ComBookAdd,
+    },
   ],
 });
 
@@ -65,4 +83,4 @@ router.beforeEach((to, from, next) => {
   }
 
   next();
-})
+});

@@ -78,42 +78,42 @@ export const ACTION_TYPES = {
 const actions = {
   [ACTION_TYPES.POST_USER_LOGIN]({ commit }, { username, password }) {
     Vue.axios
-    .get(`users/${username}`)
-    .then((response) => {
-      // Response from BE
-      setIsLoading(false);
-      if(password !== "Abc123") {
-        throw new Error('Worng email or password!!!')
-      }
-      response.data.token = makeid(16)
-      localStorage.setItem('userAuth', JSON.stringify(response.data));
-      commit(MUTATION_TYPES.USER_LOGIN, response.data);
-    })
-    .catch((error) => {
-      setIsLoading(false);
-      Vue.$toast(`API ${error}`, {
-        type: TYPE.ERROR,
-        position: POSITION.TOP_RIGHT,
-      });
-    });
-  },
-
-  [ACTION_TYPES.POST_USER_LOGOUT]({ commit }, uID) {
-    Vue.axios
-    .get(`users/${uID}`)
-    .then((response) => {
-      // Response from BE
-      setIsLoading(false);
-      localStorage.removeItem('userAuth');
-      commit(MUTATION_TYPES.USER_LOGOUT);
-    })
-    .catch((error) => {
-      setIsLoading(false);
+      .get(`users/${username}`)
+      .then((response) => {
+        // Response from BE
+        setIsLoading(false);
+        if (password !== "Abc123") {
+          throw new Error("Worng email or password!!!");
+        }
+        response.data.token = makeid(16);
+        localStorage.setItem("userAuth", JSON.stringify(response.data));
+        commit(MUTATION_TYPES.USER_LOGIN, response.data);
+      })
+      .catch((error) => {
+        setIsLoading(false);
         Vue.$toast(`API ${error}`, {
           type: TYPE.ERROR,
           position: POSITION.TOP_RIGHT,
         });
-    });
+      });
+  },
+
+  [ACTION_TYPES.POST_USER_LOGOUT]({ commit }, uID) {
+    Vue.axios
+      .get(`users/${uID}`)
+      .then((response) => {
+        // Response from BE
+        setIsLoading(false);
+        localStorage.removeItem("userAuth");
+        commit(MUTATION_TYPES.USER_LOGOUT);
+      })
+      .catch((error) => {
+        setIsLoading(false);
+        Vue.$toast(`API ${error}`, {
+          type: TYPE.ERROR,
+          position: POSITION.TOP_RIGHT,
+        });
+      });
   },
 
   [ACTION_TYPES.GET_USER_BY_ID]({ commit }, uID) {
@@ -215,8 +215,8 @@ const actions = {
         });
         setIsLoading(false);
       })
-      .catch(({response}) => {
-        const errMess = `${response.status} ${response.data.message || ''}`
+      .catch(({ response }) => {
+        const errMess = `${response.status} ${response.data.message || ""}`;
         setIsLoading(false);
         Vue.$toast(`API ${errMess}`, {
           type: TYPE.ERROR,
@@ -231,15 +231,15 @@ const setIsLoading = (status) => {
 };
 
 const makeid = (length) => {
-  var result           = '';
-  var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  var result = "";
+  var characters =
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
   var charactersLength = characters.length;
-  for ( var i = 0; i < length; i++ ) {
+  for (var i = 0; i < length; i++) {
     result += characters.charAt(Math.floor(Math.random() * charactersLength));
   }
   return result;
-}
-
+};
 
 export default {
   namespaced: true,
